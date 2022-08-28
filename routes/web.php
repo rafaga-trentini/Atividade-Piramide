@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PiramideController;
+use App\Http\Controllers\ConeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return 'Digite /piramide/(h)/(ab)/(1 - 2 - 3 para o tipo de tinta)';
+    return 'Digite /piramideController/(h)/(ab)/(tipo)<br>
+            Digite /coneController/(z)/(r)/(tipo)';
 });
 
 Route::get('/piramide/{h}/{ab}/{tipo}', function ($h, $ab, $tipo) {
@@ -46,3 +49,7 @@ Route::get('/piramide/{h}/{ab}/{tipo}', function ($h, $ab, $tipo) {
             Preço: $preco </br>
             Volume: $volume </br>";
 })->where(['h' => '[0-9]+.*','ab' => '[0-9]+.*','tipo' => '[0-9]+']);
+
+
+Route::get('/piramideController/{h}/{ab}/{tipo}', [PiramideController::class, 'index'])->where(['h' => '[0-9]+.*','ab' => '[0-9]+.*','tipo' => '[0-9]+']);
+Route::get('/coneController/{z}/{r}/{tipo}', [ConeController::class, 'index'])->where(['z' => '[0-9]+.*','r' => '[0-9]+.*','tipo' => '[0-9]+']);
